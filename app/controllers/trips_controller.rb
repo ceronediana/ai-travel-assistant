@@ -12,4 +12,11 @@ class TripsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  private
+
+  def trip_params
+    params.require(:trip).permit(:name, :photo)
+  end
+
 end
