@@ -1,5 +1,6 @@
 class TripItemsController < ApplicationController
   def new
+    @trip_item = TripItem.new
   end
 
   def create
