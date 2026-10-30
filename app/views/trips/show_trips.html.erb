@@ -1,7 +1,15 @@
 <h1 class="display-3 fw-bold"><%= @trip.name %></h1>
 <p> Trip details </p>
+
+<% @trip.each do |trip| %>
+<%= trip.name %>
+<%= trip.destination %>
+ <% end %>
+
+<h5> Here are some highlights </h5>
 <% @trip.trip_items.each do |items| %>
           <div class="card-body d-flex flex-column">
             <h5><%= trip_item.name %></h5>
             <p class="card-text text-muted"><%= trip_item.notes %></p>
           </div>
+          <% end %>
