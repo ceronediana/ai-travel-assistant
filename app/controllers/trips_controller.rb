@@ -32,6 +32,13 @@ class TripsController < ApplicationController
     redirect_to trip_path(@trip)
   end
 
+  def destroy
+    trip = Trip.find(params[:id])
+    # #chat = trip.chat
+    trip.destroy
+    redirect_to trips_path, notice: "Trip deleted"
+  end
+
   private
 
   def trip_params

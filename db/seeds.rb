@@ -8,4 +8,22 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Trip.create(name: "Japan 2028", destination: "Osaka, Japan", start_date: 10/10/2028, end_date: 10/31/2028)
+Trip.create(name: "Tokyo Adventure",
+    destination: "Tokyo, Japan",
+    user: "meow",
+    start_date: Date.today + 60,
+    end_date: Date.today + 70)
+
+    Trip.create(name: "NYC Weekend",
+    destination: "New York City, USA",
+    user: "meow"
+    start_date: Date.today + 10,
+    end_date: Date.today + 13)
+
+
+Trip.create(name: "Rome Trip",
+    destination: "Rome, Italy",
+    user: "meow",
+    start_date: Date.today + 45,
+    end_date: Date.today + 52
+    )
