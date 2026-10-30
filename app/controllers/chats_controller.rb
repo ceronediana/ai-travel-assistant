@@ -12,14 +12,13 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @chat = Chat.find(params[:id])
+    @chat = current_user.chats.find(params[:id])
   end
 
   def destroy
-    @chat = Chat.find(params[:id])
+    @chat = current_user.chats.find(params[:id])
     @trip = @chat.trip
     @chat.destroy
-
-    redirect_to trip_path(@trip)
+    redirect_to trip_path(@trip), status: :see_other
   end
 end

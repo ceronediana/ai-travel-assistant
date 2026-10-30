@@ -14,3 +14,17 @@
 <% end %>
 
 <%= link_to "Edit Trip", edit_trip_path(@trip), class: "btn btn-primary mb-3" %>
+
+<%= form_with url: trip_chats_path(@trip) do |f| %>
+  <%= f.submit "New Chat", class: "btn btn-primary mb-3" %>
+<% end %>
+
+<h5>Chats</h5>
+
+<% if @trip.chats.empty? %>
+  <p>No chats yet. Start a new conversation!</p>
+<% else %>
+  <% @trip.chats.each do |chat| %>
+    <p><%= link_to chat.title.presence || "Chat ##{chat.id}", chat_path(chat) %></p>
+  <% end %>
+<% end %>
