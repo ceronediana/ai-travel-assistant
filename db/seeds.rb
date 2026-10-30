@@ -7,3 +7,5 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Trip.create(name: "Japan 2028", destination: "Osaka, Japan", start_date: 10/10/2028, end_date: 10/31/2028)
