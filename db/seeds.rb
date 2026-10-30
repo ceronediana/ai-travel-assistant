@@ -8,4 +8,35 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Trip.create(name: "Japan 2028", destination: "Osaka, Japan", start_date: 10/10/2028, end_date: 10/31/2028)
+trip_data = [
+  {
+    name: "Tokyo Adventure",
+    destination: "Tokyo, Japan",
+    start_date: Date.today + 60,
+    end_date: Date.today + 70
+  },
+  {
+    name: "NYC Weekend",
+    destination: "New York City, USA",
+    start_date: Date.today + 10,
+    end_date: Date.today + 13
+  },
+  {
+    name: "Rome Trip",
+    destination: "Rome, Italy",
+    start_date: Date.today + 45,
+    end_date: Date.today + 52
+  }
+]
+
+user = "meow"
+
+trip_data.each do |trip|
+  Trip.create(
+    name: trip[:name],
+    destination: trip[:destination],
+    start_date: trip[:start_date],
+    end_date: trip[:end_date],
+    user: user
+  )
+end
