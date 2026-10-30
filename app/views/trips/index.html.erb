@@ -1,0 +1,7 @@
+<h1> Here are your trips ✈️</h1>
+<% @trips.each do |trip| %>
+  <div class="card-body d-flex flex-column">
+    <%= link_to trip.name, trip_path(trip), class: "text-decoration-none" %>
+    <%= link_to "Create a new trip", new_trip_path(trip), class: "btn btn-primary mt-auto" %>
+    </div>
+<% end %>
