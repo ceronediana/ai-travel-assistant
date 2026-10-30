@@ -3,6 +3,11 @@
 
   <%= simple_form_for @trip do |f| %>
     <%= f.input :name, label: "Trip Name" %>
+    <%= f.input :destination,label: "Destination", placeholder: "Wonderland" %>
+    <%= f.input :start_date,label: "Start Date", placeholder: "01/01/2026" %>
+    <%= f.input :end_date,label: "End Date", placeholder: "01/10/2026" %>
+
+    <%= f.input :photo, as: :file, label: "Cover Image" %>
 
     <%= f.submit "Update Trip", class: "btn btn-success mt-2" %>
   <% end %>
