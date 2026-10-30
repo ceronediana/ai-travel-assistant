@@ -13,12 +13,23 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.user = current_user
 
     if @trip.save
       redirect_to trip_path(@trip)
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @trip = Trip.find(params[:id])
+  end
+
+  def update
+    @trip = Trip.find(params[:id])
+    @trip.update(trip_params)
+    redirect_to trip_path(@trip)
   end
 
   def destroy
@@ -31,6 +42,6 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :photo)
+    params.require(:trip).permit(:name, :destination, :start_date, :end_date, :user_id, :photo)
   end
 end
