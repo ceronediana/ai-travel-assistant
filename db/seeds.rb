@@ -8,22 +8,27 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+user = User.find_or_create_by!(email: "chickennoodlesoup@gmail.com") do |new_user|
+  new_user.password = "123Sesame$treet"
+  new_user.password_confirmation = "123Sesame$treet"
+end
+
 Trip.create(name: "Tokyo Adventure",
     destination: "Tokyo, Japan",
-    user: "meow",
+    user: user,
     start_date: Date.today + 60,
     end_date: Date.today + 70)
 
     Trip.create(name: "NYC Weekend",
     destination: "New York City, USA",
-    user: "meow"
+    user: user,
     start_date: Date.today + 10,
     end_date: Date.today + 13)
 
 
 Trip.create(name: "Rome Trip",
     destination: "Rome, Italy",
-    user: "meow",
+    user: user,
     start_date: Date.today + 45,
     end_date: Date.today + 52
     )

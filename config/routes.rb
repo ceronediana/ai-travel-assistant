@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :trips do
+    collection do
+      post :confirm
+    end
     resources :trip_items, only: [:new, :create]
     resources :chats, only: [:create]
   end
