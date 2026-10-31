@@ -1,0 +1,41 @@
+.body {
+  background-color: rgb(201, 233, 244);
+}
+
+.trips-banner {
+  background: linear-gradient(90deg, #1772ae, #7dd3fc);
+  text-align: center;
+  margin-bottom: 4em;
+  padding: 5em;
+  border-radius: 10px;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #14b8a6, #7dd3fc);
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: linear-gradient(90deg, #1772ae, #7dd3fc);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(29, 166, 224, 0.25);
+    color: #fff;
+  }
+}
+
+.trip-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: rgb(25, 60, 141);
+  background-color: #7dd3fc;
+  border-radius: 4em;
+  height: 5em;
+  padding: 10px;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(44, 122, 239, 0.526);
+    color: white;
+  }
+}
