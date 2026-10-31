@@ -1,3 +1,10 @@
 <h1>Confirm Trip</h1>
 
-<p><strong>Name:</strong> <%= @trip.name %></p>
+<p><strong>Trip Name:</strong> <%= @trip.name %></p>
+<p><strong>Destination:</strong> <%= @trip.destination %></p>
+<p><strong>Start Date:</strong> <%= @trip.start_date %></p>
+<p><strong>End Date:</strong> <%= @trip.end_date%></p>
+
+<% if @trip.photo.attached? %>
+<p>Cover Image:</p>
+<%= image_tag url_for(@trip.photo)%>
