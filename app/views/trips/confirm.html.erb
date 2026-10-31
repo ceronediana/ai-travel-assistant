@@ -7,4 +7,20 @@
 
 <% if @trip.photo.attached? %>
 <p>Cover Image:</p>
-<%= image_tag url_for(@trip.photo)%>
+<%= image_tag url_for(@trip.photo), class: "img-fluid", style: "max-width: 300px;" %>
+<% end %>
+
+<%= simple_form_for @trip, url: trips_path, method: :post do |f|%>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :destination %>
+<%= f.hidden_field :start_date %>
+<%= f.hidden_field :end_date %>
+
+<% if @trip.photo.attached? %>
+<%= f.hidden_field :photo, value: @trip.photo.signed_id %>
+<% end %>
+
+<%= f.submit "Confirm Trip", class: "btn btn-success" %>
+<%= end %>
+
+<%= link_to "Back", new_trip_path, class: "btn btn-secondary mt-3" %>

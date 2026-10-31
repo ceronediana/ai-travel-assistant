@@ -3,7 +3,7 @@
 <p>Are you sure you want to delete this trip?</p>
 
 <%= simple_form_for [@trip, @chat], method: :destroy do |f| %>
-  <%= f.button :submit, "Delete bookmark", data: { turbo_confirm: "Are you sure?" } %>
+  <%= f.button :submit, "Delete Trip", data: { turbo_confirm: "Are you sure?" } %>
 <% end %>
 
 <%= link_to "Cancel", trip_path(@trip) %>
