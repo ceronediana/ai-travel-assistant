@@ -1,13 +1,14 @@
 class TripItemsController < ApplicationController
-  before_action :set_trip_item, only: [:show]
+  before_action :set_trip, only: %i[new create]
   def new
-    @trip_item = TripItem.new
+    @trip_item = @trip.trip_items.new
   end
 
   def create
-    @trip_item = TripItem.new(trip_item_params)
+    @trip_item = @trip.trip_items.new(trip_item_params)
+
     if @trip_item.save
-      redirect_to trip_item_path(@trip_item), notice: "Trip item created!"
+      redirect_to trip_path(@trip), notice: "Trip item created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -19,10 +20,10 @@ class TripItemsController < ApplicationController
   private
 
   def trip_item_params
-    params.require(:trip_item).permit(:name, :notes, :trip_id)
+    params.require(:trip_item).permit(:name, :notes)
   end
 
-  def set_trip_item
-    @trip_item = TripItem.find(params[:id])
+  def set_trip
+    @trip = Trip.find(params[:trip_id])
   end
 end

@@ -1,6 +1,6 @@
 <h1 class="mb-4">Add an item to your trip!</h1>
 
-<%= simple_form_for @trip_item do |f| %>
+<%= simple_form_for [@trip, @trip_item] do |f| %>
   <%= f.input :name,label: "Item Name", placeholder: "Beach Day" %>
   <%= f.input :notes,label: "Notes", placeholder: "Pack beach essentials" %>
 
