@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     member do
       post :confirm
     end
-    resources :trip_items, only: [:new, :create]
+    resources :trip_items, only: [:new, :create, :show]
     resources :chats, only: [:create]
   end
 
