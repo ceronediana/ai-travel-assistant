@@ -11,6 +11,11 @@ class TripsController < ApplicationController
     @trip = Trip.new
   end
 
+  def confirm
+    @trip = Trip.new(trip_params)
+    render :confirm
+  end
+
   def create
     @trip = Trip.new(trip_params)
 
