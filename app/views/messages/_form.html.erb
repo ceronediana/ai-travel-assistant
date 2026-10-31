@@ -1,0 +1,4 @@
+<%= simple_form_for [chat, message] do |f| %>
+  <%= f.input :content, label: "Start planning!", required: true, placeholder: "Where do I go?" %>
+  <%= f.button :submit, 'Ask TravelGenie', class: 'btn btn-primary' %>
+<% end %>

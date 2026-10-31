@@ -2,5 +2,17 @@
   <h1>New Chat</h1>
   <p>Start planning your trip with TravelGenie!</p>
 
+  <h1 id="chat_title"><%= @chat.title %></h1>
+
+  <div id="messages">
+    <% @chat.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+
+  <div id="new_message_container">
+    <%= render "messages/form", chat: @chat, message: @message %>
+  </div>
+
   <%= link_to "Back to Trip", trip_path(@chat.trip), class: "btn btn-outline-secondary" %>
 </div>
