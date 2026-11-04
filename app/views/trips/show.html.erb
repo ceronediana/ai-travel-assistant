@@ -71,5 +71,7 @@
         trip_path(@trip),
         data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
         class: "btn btn-outline-danger" %>
+
+        <%= link_to "Back to all trips", trips_path(@trip), class: "btn btn-outline-primary" %>
   </div>
 </div>
