@@ -1,18 +1,20 @@
 <div class="container mt-4">
-  <h1>New Chat</h1>
-  <p>Start planning your trip with TravelGenie!</p>
 
-  <h1 id="chat_title"><%= @chat.title %></h1>
+  <h1 id="chat_title"><%= @chat.title.presence || "New Chat" %></h1>
+  <p>Plan your trip to <%= @chat.trip.destination %> with TravelGenie!</p>
 
-  <div id="messages">
+  <hr>
+
+  <div id="messages" class="mb-4">
     <% @chat.messages.each do |message| %>
       <%= render "messages/message", message: message %>
     <% end %>
   </div>
 
-  <div id="new_message_container">
+  <div id="new_message_container" class="mb-4">
     <%= render "messages/form", chat: @chat, message: @message %>
   </div>
 
   <%= link_to "Back to Trip", trip_path(@chat.trip), class: "btn btn-outline-secondary" %>
+
 </div>
