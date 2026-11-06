@@ -1,6 +1,7 @@
 class TripItemsController < ApplicationController
   before_action :set_trip
-  before_action :set_trip_item, only: %i[show edit update destroy]
+  before_action :set_trip_item, only: %i[edit update destroy]
+
   def new
     @trip_item = @trip.trip_items.new
   end
@@ -13,9 +14,6 @@ class TripItemsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
   end
 
   def edit
@@ -31,20 +29,20 @@ class TripItemsController < ApplicationController
 
   def destroy
     @trip_item.destroy
-    redirect_to trip_path(@trip), notice: "Trip Item deleted"
+    redirect_to trip_path(@trip), notice: "Trip item deleted"
   end
 
   private
-
-  def trip_item_params
-    params.require(:trip_item).permit(:name, :notes)
-  end
 
   def set_trip
     @trip = Trip.find(params[:trip_id])
   end
 
   def set_trip_item
-    @trip_item = @trip.trip_items.find(params[:id])
+    @trip_item = TripItem.find(params[:id])
+  end
+
+  def trip_item_params
+    params.require(:trip_item).permit(:name, :notes)
   end
 end

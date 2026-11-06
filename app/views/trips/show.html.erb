@@ -61,7 +61,8 @@
       <% end %>
 
       <%= link_to "Add a trip item", new_trip_trip_item_path(@trip), class: "btn btn-outline-secondary" %>
-      <%= link_to "Edit", edit_trip_trip_item_path(@trip, trip_item), class: "btn btn-outline-secondary" %>
+      <%= link_to "Edit", edit_trip_trip_item_path(@trip), class: "btn btn-outline-secondary"%>
+      <%= link_to "Delete", trip_trip_item_path(@trip), data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
     </div>
   </div>
 
