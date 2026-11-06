@@ -37,4 +37,7 @@ class WeatherTool < RubyLLM::Tool
 
     "The current temperature in #{city} is #{temperature}°C.\n\n#{forecasts.join("\n")}"
   end
+
+rescue => e
+  { error: e.message }
 end
