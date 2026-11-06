@@ -1,4 +1,21 @@
-<div class="container text-center mt-5">
-  <h1>TravelGenie</h1>
-  <p>Plan your trips, organize your travel ideas, and get personalized recommendations with help from AI.</p>
+<div class="container-fluid p-0">
+    <div class="position-relative">
+
+        <%= image_tag "hero.jpg", class: "img-fluid w-100", alt: "Travel destination" %>
+
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-75">
+            <h1 class="display-3 fw-bold">TravelGenie</h1>
+
+            <p class="lead">
+                Plan your trips, organize your travel ideas, and get
+                personalized recommendations with help from AI.
+            </p>
+
+            <%= link_to "Start Planning", trips_path, class: "btn btn-primary btn-lg" %>
+
+        </div>
+
+    </div>
 </div>
