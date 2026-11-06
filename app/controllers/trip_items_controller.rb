@@ -19,6 +19,9 @@ class TripItemsController < ApplicationController
   def edit
   end
 
+  def category
+  end
+
   def update
     if @trip_item.update(trip_item_params)
       redirect_to trip_path(@trip), notice: "Trip item updated!"
@@ -43,6 +46,6 @@ class TripItemsController < ApplicationController
   end
 
   def trip_item_params
-    params.require(:trip_item).permit(:name, :notes)
+    params.require(:trip_item).permit(:name, :notes, tag_list: [])
   end
 end
