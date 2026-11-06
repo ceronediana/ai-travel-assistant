@@ -9,15 +9,24 @@
     <div class="row">
       <% @trips.each do |trip| %>
         <div class="col-md-6 mb-3">
-          <div class="card shadow-sm rounded-3">
+          <div class="card shadow-sm rounded-3 h-100">
+
+            <% if trip.image.attached? %>
+              <%= image_tag trip.image, class: "card-img-top", alt: trip.name %>
+            <% end %>
+
             <div class="card-body">
 
               <h3><%= trip.name %></h3>
+
               <p>📍 <%= trip.destination %></p>
+
               <p>
                 📅 <%= trip.start_date %> to <%= trip.end_date %>
               </p>
+
               <%= link_to "View Trip", trip_path(trip), class: "btn btn-outline-primary" %>
+
             </div>
           </div>
         </div>
