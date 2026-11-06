@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   member do
     post :confirm
   end
-  resources :trip_items
+  resources :trip_items, only: [:new, :create]
   resources :chats, only: [:create]
 end
 
@@ -14,7 +14,7 @@ end
     resources :messages, only: [:create]
   end
 
-  resources :trip_items, only: [:edit, :destroy]
+  resources :trip_items, only: [:edit, :update, :destroy]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

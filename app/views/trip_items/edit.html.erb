@@ -1,8 +1,9 @@
 <h1 class="mb-4">Edit your trip item!</h1>
 
-<%= simple_form_for [@trip, @trip_item] do |f| %>
+<%= simple_form_for @trip_item do |f| %>
   <%= f.input :name,label: "Item Name", placeholder: "Beach Day" %>
   <%= f.input :notes,label: "Notes", placeholder: "Pack beach essentials" %>
+  <%= f.input :tag_list, as: :check_boxes, collection: [ "Accomodations", "Food", "Activities", "Things to pack" ] %>
 
   <%= f.submit "Edit Trip Item", class: "btn btn-success mt-2" %>
 <% end %>

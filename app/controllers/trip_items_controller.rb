@@ -1,5 +1,5 @@
 class TripItemsController < ApplicationController
-  before_action :set_trip
+  before_action :set_trip, only: %i[new create]
   before_action :set_trip_item, only: %i[edit update destroy]
 
   def new
@@ -17,12 +17,14 @@ class TripItemsController < ApplicationController
   end
 
   def edit
+    @trip = @trip_item.trip
   end
 
   def category
   end
 
   def update
+    @trip = @trip_item.trip
     if @trip_item.update(trip_item_params)
       redirect_to trip_path(@trip), notice: "Trip item updated!"
     else
@@ -31,6 +33,7 @@ class TripItemsController < ApplicationController
   end
 
   def destroy
+    @trip = @trip_item.trip
     @trip_item.destroy
     redirect_to trip_path(@trip), notice: "Trip item deleted"
   end
