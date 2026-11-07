@@ -10,3 +10,17 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+/* Keep all trip card images the same size */
+.trip-card-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Keep card content aligned consistently */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
