@@ -33,9 +33,15 @@
     <%= render "shared/flashes" %>
 
     <main id="main-content">
-      <div class="container my-5">
+      <% if controller_name == "pages" && action_name == "home" %>
+        <!-- Homepage: Full width -->
         <%= yield %>
-      </div>
+      <% else %>
+        <!-- Other pages: Normal container -->
+        <div class="container my-5">
+          <%= yield %>
+        </div>
+      <% end %>
     </main>
   </body>
 </html>

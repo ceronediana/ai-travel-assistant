@@ -6,17 +6,21 @@
   <% if @trips.empty? %>
     <p>You don't have any trips yet. Create your first trip to get started!</p>
   <% else %>
+
     <div class="row">
       <% @trips.each do |trip| %>
         <div class="col-md-6 mb-3">
           <div class="card trip-card">
 
             <% if trip.image.attached? %>
-              <%= image_tag trip.image, class: "card-img-top", alt: trip.name %>
+              <%= image_tag trip.image,
+                class: "card-img-top trip-card-image",
+                alt: trip.name %>
+            <% else %>
+              <div class="trip-card-image bg-light"></div>
             <% end %>
 
-            <div class="card-body">
-
+            <div class="card-body d-flex flex-column">
               <h3><%= trip.name %></h3>
 
               <p>📍 <%= trip.destination %></p><p>
