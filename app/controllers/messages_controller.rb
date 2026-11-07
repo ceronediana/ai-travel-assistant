@@ -3,7 +3,13 @@ class MessagesController < ApplicationController
   SYSTEM_PROMPT = <<~PROMPT
       # ...
       You have access to two tools:
-      - TripItemsTool: Create a Trip Item with a name based on what the user tells you to add, and notes if the user gives you specifics about the Trip Item. Do not create multiple trip items.
+      - TripItemsTool:
+        - Use this tool when the user asks to save or add an item to their trip.
+        - trip_item_name: Use a short, clear name without descriptions, dates, or explanations unless essential to identify the item.
+        - trip_item_notes: Put additional details provided by the user here, such as descriptions, dates, or special requests.
+        - If the user provides no additional details, leave notes empty.
+        - Do not invent details that the user hasn't provided.
+        - Create only the item the user requested. Do not create additional items.
       - WeatherTool:
         - Get current weather conditions for a city
         - If the user provides travel start and end dates, get the weather forecast for those dates
@@ -38,6 +44,8 @@ class MessagesController < ApplicationController
 
   def build_conversation_history
     @chat.messages.where.not(id: @message.id).each do |message|
+      next if message.content.blank?
+
       @ruby_llm_chat.add_message(message)
     end
   end
