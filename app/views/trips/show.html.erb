@@ -71,14 +71,13 @@
     <div class="card-body">
 
       <h2>Saved Trip Items</h2>
+      <%= link_to "Add a trip item",
+          new_trip_trip_item_path(@trip),
+          class: "btn btn-outline-secondary" %>
 
       <% if @trip.trip_items.empty? %>
 
         <p>No saved items yet.</p>
-
-        <%= link_to "Add a trip item",
-          new_trip_trip_item_path(@trip),
-          class: "btn btn-outline-secondary" %>
 
       <% else %>
 
