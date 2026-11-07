@@ -1,37 +1,59 @@
-<div class="trips-banner">
-  <h1>Here are your Trips ✈️</h1>
+<div class="container trips-page">
 
-  <%= link_to "Create a new trip", new_trip_path, class: "btn btn-gradient" %>
+  <div class="trips-banner">
+    <div>
+      <h1>Here are your Trips ✈️</h1>
+      <p>All your adventures, in one place.</p>
+    </div>
+
+    <%= link_to "Create a new trip", new_trip_path,
+        class: "btn btn-gradient" %>
   </div>
+
   <% if @trips.empty? %>
-    <p>You don't have any trips yet. Create your first trip to get started!</p>
+    <div class="empty-trips">
+      <p>You don't have any trips yet. Create your first trip to get started!</p>
+    </div>
   <% else %>
 
-    <div class="row">
+    <div class="row g-4">
       <% @trips.each do |trip| %>
-        <div class="col-md-6 mb-3">
-          <div class="card trip-card">
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card trip-card h-100">
 
             <% if trip.image.attached? %>
               <%= image_tag trip.image,
-                class: "card-img-top trip-card-image",
-                alt: trip.name %>
+                  class: "card-img-top trip-card-image",
+                  alt: trip.name %>
             <% else %>
-              <div class="trip-card-image bg-light"></div>
+              <div class="trip-card-image trip-card-placeholder">
+                ✈️
+              </div>
             <% end %>
 
             <div class="card-body d-flex flex-column">
-              <h3><%= trip.name %></h3>
+              <h3 class="trip-card-title"><%= trip.name %></h3>
 
-              <p>📍 <%= trip.destination %></p><p>
+              <p class="trip-card-destination">
+                📍 <%= trip.destination %>
+              </p>
+
+              <p class="trip-card-dates">
                 📅 <%= trip.start_date %> to <%= trip.end_date %>
               </p>
 
-              <%= link_to "View Trip", trip_path(trip), class: "btn btn-outline" %>
+              <div class="mt-auto pt-3">
+                <%= link_to "View Trip", trip_path(trip),
+                    class: "btn btn-outline" %>
+              </div>
 
             </div>
           </div>
         </div>
+
       <% end %>
     </div>
+
   <% end %>
+</div>

@@ -1,12 +1,13 @@
 <% if message.role == "user" %>
-  <div class="d-flex justify-content-end mb-2">
-    <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
+  <div class="message-row user-message">
+    <div class="message-bubble user-bubble">
       <%= raw(render_markdown(message.content)) %>
     </div>
   </div>
+
 <% elsif message.role == "assistant" %>
-  <div class="d-flex justify-content-start mb-5">
-    <div class="px-3 pb-0 pt-3">
+  <div class="message-row assistant-message">
+    <div class="message-bubble assistant-bubble">
       <%= raw(render_markdown(message.content)) %>
     </div>
   </div>

@@ -1,114 +1,130 @@
-<div class="container mt-4">
+<div class="container mt-5 trip-details-page">
 
-  <!-- Trip Details -->
-  <div class="card shadow-sm rounded-3 mb-4">
-    <div class="card-body">
-
-      <% if @trip.image.attached? %>
-        <%= image_tag @trip.image,
-          class: "w-100 rounded-3 mb-4",
-          style: "max-height: 400px; object-fit: cover;",
+  <!-- Trip banner -->
+  <div class="trip-details-banner mb-4">
+    <% if @trip.image.attached? %>
+      <%= image_tag @trip.image,
+          class: "trip-details-image",
           alt: @trip.name %>
-      <% end %>
+    <% end %>
 
+    <div class="trip-details-overlay"></div>
+
+    <div class="trip-details-header">
       <h1><%= @trip.name %></h1>
+      <p>📍 <%= @trip.destination %></p>
+      <p>📅 <%= @trip.start_date %> – <%= @trip.end_date %></p>
+    </div>
+  </div>
 
-      <p>Destination: <%= @trip.destination %></p>
+  <!-- TravelGenie planning and chats -->
+  <div class="card trip-section-card mb-4">
+    <div class="card-body trip-section-body">
 
-      <p>
-        Dates:
-        <%= @trip.start_date %> to <%= @trip.end_date %>
-      </p>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+        <div>
+          <h2 class="trip-section-title">Plan your trip with TravelGenie ✨</h2>
+          <p class="trips-subtitle">
+            Ask for recommendations, explore activities, and plan your next adventure.
+          </p>
+        </div>
+
+        <%= form_with url: trip_chats_path(@trip) do |f| %>
+          <%= f.submit "＋ Start a new chat",
+              class: "btn btn-gradient" %>
+        <% end %>
+      </div>
+
+      <hr class="section-divider">
+
+      <h3 class="trip-subsection-title mb-3">Your Chats</h3>
+
+      <% if @trip.chats.empty? %>
+        <p class="empty-section-text mb-0">
+          No chats yet. Start a new conversation to begin planning!
+        </p>
+      <% else %>
+        <div class="row g-3">
+          <% @trip.chats.each do |chat| %>
+            <div class="col-12 col-md-6">
+              <%= link_to chat_path(chat), class: "chat-card-link" do %>
+                <div class="chat-card h-100">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="chat-icon">💬</div>
+                    <div>
+                      <h5 class="chat-card-title">
+                        <%= chat.title.presence || "Chat ##{chat.id}" %>
+                      </h5>
+                      <span class="chat-card-subtitle">Open conversation →</span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
     </div>
   </div>
 
-  <!-- TravelGenie Chats -->
-  <div class="card shadow-sm rounded-3 mb-4">
-    <div class="card-body">
+  <!-- Saved trip items -->
+  <div class="card trip-section-card mb-4">
+    <div class="card-body trip-section-body">
 
-      <h2>Plan your trip with TravelGenie!</h2>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+          <h2 class="trip-section-title">Saved trip items</h2>
+          <p class="trips-subtitle">
+            Keep track of the places, activities, and ideas you love.
+          </p>
+        </div>
 
-      <p>
-        Ask for recommendations, explore activities, and plan your next adventure.
-      </p>
+        <%= link_to "＋ Add trip item",
+            new_trip_trip_item_path(@trip),
+            class: "btn btn-gradient" %>
+      </div>
 
-      <%= form_with url: trip_chats_path(@trip) do |f| %>
-        <%= f.submit "Start a new chat",
-          class: "btn btn-primary btn-lg mb-3" %>
-      <% end %>
-
-      <hr>
-
-      <h3>Your Chats</h3>
-
-      <% if @trip.chats.empty? %>
-        <p>No chats yet. Start a new conversation!</p>
+      <% if @trip.trip_items.empty? %>
+        <div class="empty-trips text-center p-4">
+          <h5>Your itinerary is waiting!</h5>
+          <p class="empty-section-text mb-0">
+            Save places and activities here as you discover them.
+          </p>
+        </div>
       <% else %>
+        <div class="row g-3">
+          <% @trip.trip_items.each do |item| %>
+            <div class="col-12">
+              <div class="saved-item-card">
+                <div class="d-flex flex-wrap justify-content-between gap-3">
+                  <div class="flex-grow-1">
+                    <h5 class="saved-item-title"><%= item.name %></h5>
 
-        <div class="row">
+                    <p class="saved-item-notes">
+                      <%= item.notes.presence || "Add notes for this item." %>
+                    </p>
 
-          <% @trip.chats.each do |chat| %>
-            <div class="col-md-6 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <%= link_to chat.title.presence || "Chat ##{chat.id}",
-                    chat_path(chat) %>
+                    <% item.tag_list.each do |tag| %>
+                      <span class="badge trip-tag"><%= tag %></span>
+                    <% end %>
+                  </div>
+
+                  <div class="d-flex align-items-start gap-2">
+                    <%= link_to "Edit",
+                        edit_trip_item_path(item),
+                        class: "btn btn-gradient btn-sm action-btn" %>
+
+                    <%= link_to "Delete",
+                        trip_item_path(item),
+                        data: { turbo_method: :delete },
+                        class: "btn btn-danger-soft btn-sm action-btn" %>
+                  </div>
                 </div>
               </div>
             </div>
           <% end %>
-
         </div>
-
-      <% end %>
-
-    </div>
-  </div>
-
-  <!-- Saved Trip Items -->
-  <div class="card shadow-sm rounded-3 mb-4">
-    <div class="card-body">
-
-      <h2>Saved Trip Items</h2>
-      <%= link_to "Add a trip item",
-          new_trip_trip_item_path(@trip),
-          class: "btn btn-outline-secondary" %>
-
-      <% if @trip.trip_items.empty? %>
-
-        <p>No saved items yet.</p>
-
-      <% else %>
-
-        <% @trip.trip_items.each do |item| %>
-
-          <div class="mb-3">
-
-            <h5><%= item.name %></h5>
-
-            <p style="<%= 'color: #adb5bd;' if item.notes.blank? %>">
-              <%= item.notes.presence || "Add notes for this item" %></p>
-            </p>
-            <% item.tag_list.each do |tag| %>
-              <span class="badge text-bg-primary"><%= tag %></span>
-            <% end %>
-
-            <hr>
-
-            <%= link_to "Edit",
-              edit_trip_item_path(item),
-              class: "btn btn-outline-secondary" %>
-
-            <%= link_to "Delete",
-              trip_item_path(item),
-              data: { turbo_method: :delete },
-              class: "btn btn-outline-danger" %>
-
-          </div>
-
-        <% end %>
-
       <% end %>
 
     </div>
@@ -116,23 +132,21 @@
 
   <!-- Trip Actions -->
   <div class="d-flex flex-wrap gap-2 mb-4">
-
     <%= link_to "Edit Trip",
-      edit_trip_path(@trip),
-      class: "btn btn-outline-secondary" %>
+        edit_trip_path(@trip),
+        class: "btn btn-gradient action-btn" %>
 
     <%= link_to "Delete Trip",
-      trip_path(@trip),
-      data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      },
-      class: "btn btn-outline-danger" %>
+        trip_path(@trip),
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        },
+        class: "btn btn-danger-soft action-btn" %>
 
-    <%= link_to "Back to all trips",
-      trips_path,
-      class: "btn btn-outline-primary" %>
-
+    <%= link_to "← Back to all trips",
+        trips_path,
+        class: "btn btn-light-blue action-btn" %>
   </div>
 
 </div>

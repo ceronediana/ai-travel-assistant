@@ -1,11 +1,27 @@
-<h1 class="mb-4">Edit your trip item!</h1>
+<div class="container mt-5 create-trip-page">
+  <div class="trips-banner">
+    <h1 class="mb-0">Edit Your Trip Item! ✏️</h1>
+    <p>Update the details of something in your itinerary.</p>
+  </div>
 
-<%= simple_form_for @trip_item do |f| %>
-  <%= f.input :name,label: "Item Name", placeholder: "Beach Day" %>
-  <%= f.input :notes,label: "Notes", placeholder: "Pack beach essentials" %>
-  <%= f.input :tag_list, as: :check_boxes, collection: [ "Accomodations", "Food", "Activities", "Things to pack" ] %>
+  <div class="app-form-card">
+    <%= simple_form_for @trip_item, html: { class: "app-form" } do |f| %>
+      <%= f.input :name,
+          label: "Item Name",
+          placeholder: "Beach Day" %>
 
-  <%= f.submit "Save Changes", class: "btn btn-success mt-2" %>
-<% end %>
+      <%= f.input :notes,
+          label: "Notes",
+          placeholder: "Pack beach essentials" %>
 
-<%= link_to "Back trip", trip_path(@trip), class: "btn btn-secondary mt-4" %>
+      <%= f.input :tag_list,
+          as: :check_boxes,
+          collection: ["Accommodations", "Food", "Activities", "Things to pack"] %>
+
+      <div class="app-form-actions">
+        <%= f.submit "Save Changes", class: "btn btn-gradient" %>
+        <%= link_to "Back to Trip", trip_path(@trip), class: "btn btn-light-blue" %>
+      </div>
+    <% end %>
+  </div>
+</div>
