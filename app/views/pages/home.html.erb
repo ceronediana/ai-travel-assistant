@@ -1,21 +1,30 @@
 <div class="container-fluid p-0">
-    <div class="position-relative">
+  <div class="position-relative w-100">
 
-        <%= image_tag "hero.jpg", class: "img-fluid w-100", alt: "Travel destination" %>
+    <!-- Hero Image -->
+    <%= image_tag "hero.jpg",
+      class: "w-100 d-block",
+      style: "height: ; object-fit: cover;",
+      alt: "Travel destination" %>
 
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    <!-- Dark Overlay -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-75"></div>
 
-        <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-75">
-            <h1 class="display-3 fw-bold">TravelGenie</h1>
+    <!-- Hero Content -->
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-75">
 
-            <p class="lead">
-                Plan your trips, organize your travel ideas, and get
-                personalized recommendations with help from AI.
-            </p>
+      <h1 class="display-3 fw-bold">TravelGenie</h1>
 
-            <%= link_to "Start Planning", trips_path, class: "btn btn-primary btn-lg" %>
+      <p class="lead">
+        Plan your trips, organize your travel ideas, and get
+        personalized recommendations with help from the TravelGenie AI.
+      </p>
 
-        </div>
+      <%= link_to "Start Planning",
+        trips_path,
+        class: "btn btn-primary btn-lg" %>
 
     </div>
+
+  </div>
 </div>
