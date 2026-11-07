@@ -88,8 +88,9 @@
 
             <h5><%= item.name %></h5>
 
-            <p><%= item.notes.presence || "Add notes for this item" %></p>
-
+            <p style="<%= 'color: #adb5bd;' if item.notes.blank? %>">
+              <%= item.notes.presence || "Add notes for this item" %></p>
+            </p>
             <% item.tag_list.each do |tag| %>
               <span class="badge text-bg-primary"><%= tag %></span>
             <% end %>
