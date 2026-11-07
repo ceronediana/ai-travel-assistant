@@ -12,16 +12,700 @@
 @import "pages/index";
 @import "trips/index";
 
-/* Keep all trip card images the same size */
-.trip-card-image {
+/* =================================
+   TRAVELGENIE SHARED STYLES
+================================= */
+
+/* Calendar fix */
+.app-form input[type="date"] {
+  appearance: auto;
+  -webkit-appearance: auto;
+  background-image: none;
+}
+
+/* =================================
+   PAGE LAYOUT
+================================= */
+
+.trips-page,
+.trip-details-page {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  color: #083757;
+}
+
+/* =================================
+   BANNERS
+================================= */
+
+.trips-banner,
+.trip-details-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #1772ae, #7dd3fc);
+  color: #fff;
+}
+
+.trips-banner {
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  min-height: 200px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.trips-banner h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.trips-banner p,
+.trip-details-header p {
+  color: #eaf8ff;
+  margin-bottom: .4rem;
+}
+
+/* Trip details banner */
+
+.trip-details-banner {
+  position: relative;
+  min-height: 250px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.trip-details-image,
+.trip-details-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.trip-details-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.trip-details-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(8, 55, 87, .78),
+    rgba(23, 114, 174, .55)
+  );
+}
+
+.trip-details-header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.trip-details-header h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: .75rem;
+}
+
+/* =================================
+   SHARED BUTTONS
+================================= */
+
+.btn-gradient,
+.btn-light-blue,
+.btn-danger-soft,
+.trips-page .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: .7rem 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+/* Main gradient button */
+
+.btn-gradient,
+.trips-page .btn-outline {
+  background: linear-gradient(90deg, #14b8a6, #7dd3fc);
+  border: none;
+  color: #083757;
+  box-shadow: 0 4px 12px rgba(7, 78, 109, .18);
+}
+
+.btn-gradient:hover,
+.trips-page .btn-outline:hover {
+  background: linear-gradient(90deg, #1772ae, #7dd3fc);
+  color: #fff;
+}
+
+/* Secondary button */
+
+.btn-light-blue {
+  background: #e8f8ff;
+  border: 1px solid #c5eafa;
+  color: #083757;
+}
+
+.btn-light-blue:hover {
+  background: #1772ae;
+  border-color: #1772ae;
+  color: #fff;
+}
+
+/* Destructive button */
+
+.btn-danger-soft {
+  background: #fff0f0;
+  border: 1px solid #f5cccc;
+  color: #a33a3a;
+}
+
+.btn-danger-soft:hover {
+  background: #c94b4b;
+  border-color: #c94b4b;
+  color: #fff;
+}
+
+/* Shared hover effect */
+
+.btn-gradient:hover,
+.btn-light-blue:hover,
+.btn-danger-soft:hover,
+.trips-page .btn-outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(5, 70, 98, .18);
+}
+
+/* =================================
+   TRIP CARDS
+================================= */
+
+.trips-page .trip-card,
+.trip-details-page .trip-section-card,
+.trips-page .empty-trips,
+.trip-details-page .empty-trips {
+  background: #fff;
+  border: 1px solid #e5edf3;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(8, 55, 87, .08);
+}
+
+.trips-page .trip-card {
+  color: #083757;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.trips-page .trip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(23, 114, 174, .16);
+}
+
+/* Card images */
+
+.trips-page .trip-card-image {
+  display: block;
   width: 100%;
   height: 250px;
   object-fit: cover;
   object-position: center;
 }
 
-/* Keep card content aligned consistently */
-.card-body {
+.trips-page .trip-card-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #e8f8fc, #f0fdfa);
+  color: #1772ae;
+  font-size: 3rem;
+}
+
+/* Card content */
+
+.trips-page .trip-card .card-body {
+  padding: 1.4rem;
+}
+
+.trip-card-title {
+  color: #083757;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.trip-card-destination {
+  color: #315d78;
+}
+
+.trip-card-dates {
+  color: #6d8b9e;
+  font-size: .9rem;
+}
+
+.empty-trips {
+  padding: 2rem;
+  color: #315d78;
+}
+
+/* =================================
+   TRIP DETAILS SECTIONS
+================================= */
+
+.trip-section-body {
+  padding: 1.6rem;
+}
+
+.trip-section-title {
+  color: #083757;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: .4rem;
+}
+
+.trips-subtitle,
+.empty-section-text {
+  color: #6d8b9e;
+}
+
+.trips-subtitle {
+  margin-bottom: 0;
+}
+
+.trip-subsection-title {
+  color: #083757;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.section-divider {
+  border-color: #dceaf1;
+  opacity: 1;
+  margin: 1.4rem 0;
+}
+
+/* Chat and saved item cards on trip details */
+
+.chat-card,
+.saved-item-card {
+  background: #f8fcff;
+  border: 1px solid #e1edf4;
+  border-radius: 12px;
+}
+
+.chat-card {
+  padding: 1.1rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.chat-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.chat-card-link:hover .chat-card {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(23, 114, 174, .12);
+}
+
+.chat-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: #e3f7fa;
+  border-radius: 12px;
+  font-size: 1.3rem;
+}
+
+.chat-card-title,
+.saved-item-title {
+  color: #083757;
+  font-weight: 700;
+}
+
+.chat-card-title {
+  margin-bottom: .25rem;
+}
+
+.chat-card-subtitle {
+  color: #1772ae;
+  font-size: .85rem;
+}
+
+.saved-item-card {
+  padding: 1.2rem;
+}
+
+.saved-item-title {
+  margin-bottom: .4rem;
+}
+
+.saved-item-notes {
+  color: #52748a;
+  margin-bottom: .7rem;
+}
+
+.trip-tag {
+  background: #e3f7fa;
+  color: #1772ae;
+  border-radius: 20px;
+  padding: .4rem .7rem;
+  margin: 0 .25rem .25rem 0;
+}
+
+/* Trip bottom actions */
+
+.trip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* =================================
+   SHARED FORM STYLING
+================================= */
+
+.app-form-card {
+  background: #fff;
+  border: 1px solid #e5edf3;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(8, 55, 87, .08);
+  color: #083757;
+}
+
+.app-form label {
+  color: #083757;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+
+.app-form .form-control,
+.app-form .form-select {
+  border: 1px solid #dceaf1;
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  color: #083757;
+}
+
+.app-form .form-control:focus,
+.app-form .form-select:focus {
+  border-color: #7dd3fc;
+  box-shadow: 0 0 0 .2rem rgba(23, 114, 174, .12);
+}
+
+.app-form .form-control::placeholder {
+  color: #9aafbd;
+}
+
+.app-form input[type="file"] {
+  padding: .65rem;
+}
+
+.app-form .form-group,
+.app-form .mb-3 {
+  margin-bottom: 1.25rem;
+}
+
+.app-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1.5rem;
+}
+
+/* =================================
+   CHAT PAGE
+================================= */
+
+.chat-page {
+  max-width: 1000px;
+  padding-bottom: 2rem;
+  color: #083757;
+}
+
+/* Chat header */
+
+.chat-header {
+  margin-bottom: 1.25rem;
+}
+
+.chat-header h1 {
+  color: #083757;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: .4rem;
+}
+
+.chat-header p {
+  color: #6d8b9e;
+  margin-bottom: 0;
+}
+
+/* Main chat window */
+
+.chat-page .chat-card {
   display: flex;
   flex-direction: column;
+  height: 70vh;
+  min-height: 450px;
+  max-height: 750px;
+  background: #fff;
+  border: 1px solid #e5edf3;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(8, 55, 87, .08);
+  overflow: hidden;
+}
+
+/* Scrollable message history */
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 1rem;
+  padding: 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #f8fcff;
+  scroll-behavior: smooth;
+}
+
+/* Message rows */
+
+.message-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: .75rem;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.assistant-message {
+  justify-content: flex-start;
+}
+
+/* Message bubbles */
+
+.message-bubble {
+  max-width: 80%;
+  padding: .9rem 1.2rem;
+  border-radius: 16px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+/* User messages */
+
+.user-bubble {
+  background: #F1F3F5;
+  color: #083757;
+  border-bottom-right-radius: 4px;
+}
+
+/* TravelGenie responses */
+
+.assistant-bubble {
+  background: #fff;
+  color: #315d78;
+  border: 1px solid #e1edf4;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(8, 55, 87, .05);
+}
+
+/* Markdown inside messages */
+
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3 {
+  color: #083757;
+  font-weight: 700;
+  margin-top: .8rem;
+  margin-bottom: .5rem;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+  padding-left: 1.4rem;
+}
+
+.message-bubble a {
+  color: #1772ae;
+}
+
+/* Message form area */
+
+.chat-form-container {
+  flex-shrink: 0;
+  padding: 1.2rem 1.5rem;
+  background: #fff;
+  border-top: 1px solid #e5edf3;
+}
+
+/* Chat form */
+
+.chat-form {
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.chat-form .form-group,
+.chat-form .mb-3 {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+.chat-form label {
+  color: #083757;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+
+.chat-form textarea.form-control {
+  min-height: 50px;
+  max-height: 140px;
+  resize: vertical;
+  border: 1px solid #dceaf1;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  color: #083757;
+  margin-bottom: 20px;
+}
+
+.chat-form textarea.form-control:focus {
+  border-color: #7dd3fc;
+  box-shadow: 0 0 0 .2rem rgba(23, 114, 174, .12);
+}
+
+.chat-form textarea::placeholder {
+  color: #9aafbd;
+}
+
+.chat-form .btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+/* Chat actions */
+
+.chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1.25rem;
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 576px) {
+
+  /* Banners */
+
+  .trips-banner,
+  .trip-details-banner {
+    padding: 1.5rem;
+  }
+
+  .trips-banner h1 {
+    font-size: 1.9rem;
+  }
+
+  .trip-details-banner {
+    min-height: 220px;
+  }
+
+  .trip-details-header h1 {
+    font-size: 1.9rem;
+  }
+
+  /* Trip details */
+
+  .trip-section-body {
+    padding: 1.2rem;
+  }
+
+  .trip-section-title {
+    font-size: 1.3rem;
+  }
+
+  /* Trip cards */
+
+  .trips-page .trip-card-image {
+    height: 220px;
+  }
+
+  /* Trip actions */
+
+  .trip-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  /* Forms */
+
+  .app-form-card {
+    padding: 1.3rem;
+  }
+
+  .app-form-actions .btn {
+    width: 100%;
+  }
+
+  /* Chat */
+
+  .chat-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .chat-page .chat-card {
+    min-height: 400px;
+  }
+
+  .chat-messages {
+    padding: 1rem;
+  }
+
+  .message-bubble {
+    max-width: 90%;
+    padding: .8rem 1rem;
+  }
+
+  .chat-form-container {
+    padding: 1rem;
+  }
+
+  .chat-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chat-form .btn {
+    width: 100%;
+  }
+
+  .chat-actions .btn {
+    flex: 1;
+  }
 }

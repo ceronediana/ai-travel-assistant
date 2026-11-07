@@ -1,14 +1,51 @@
-<div class="trips-banner"> <h1 class="mb-4">Create a New Trip!</h1> </div>
+<div class="container mt-5 create-trip-page">
 
+  <div class="trips-banner">
+    <h1 class="mb-0">Create a New Trip! ✈️</h1>
+    <p>Where will your next adventure take you?</p>
+  </div>
 
-<%= simple_form_for @trip do |f| %>
-  <%= f.input :name,label: "Trip Name", placeholder: "Best Trip Ever" %>
-  <%= f.input :destination,label: "Destination", placeholder: "Wonderland" %>
-  <%= f.input :start_date, as: :date, html5: true, label: "Start Date" %>
-  <%= f.input :end_date, as: :date, html5: true, label: "End Date" %>
-  <%= f.input :image, as: :file, label: "Trip Image", input_html: { accept: "image/*" } %>
+  <div class="app-form-card">
+    <%= simple_form_for @trip, html: { class: "app-form" } do |f| %>
 
- <%=  f.submit "Create Trip", class: " btn btn-gradient"  %>
-<% end %>
+      <%= f.input :name,
+          label: "Trip Name",
+          placeholder: "Best Trip Ever" %>
 
-<%= link_to "Back to all trips", trips_path, class: "btn btn-standard mt-4" %>
+      <%= f.input :destination,
+          label: "Destination",
+          placeholder: "Wonderland" %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :start_date,
+              as: :date,
+              html5: true,
+              label: "Start Date" %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.input :end_date,
+              as: :date,
+              html5: true,
+              label: "End Date" %>
+        </div>
+      </div>
+
+      <%= f.input :image,
+          as: :file,
+          label: "Trip Image",
+          input_html: { accept: "image/*" } %>
+
+      <div class="app-form-actions">
+        <%= f.submit "Create Trip", class: "btn btn-gradient" %>
+
+        <%= link_to "Back to all trips",
+            trips_path,
+            class: "btn btn-light-blue" %>
+      </div>
+
+    <% end %>
+  </div>
+
+</div>
