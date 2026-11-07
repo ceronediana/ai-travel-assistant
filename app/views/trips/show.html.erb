@@ -58,18 +58,23 @@
 
       <% if @trip.trip_items.empty? %>
         <p>No saved items yet.</p>
+        <%= link_to "Add a trip item", new_trip_trip_item_path(@trip), class: "btn btn-outline-secondary" %>
       <% else %>
         <% @trip.trip_items.each do |item| %>
           <div class="mb-3">
-            <h5><%= item.name %></h5>
-            <p><%= item.notes %></p>
+            <h5><%= item.name %></h5> <p><%= item.notes %></p>
+            <% item.tag_list.each do |tag| %>
+            <span class="badge text-bg-primary"><%= tag %></span>
+            <% end %>
             <hr>
+            <%= link_to "Edit", edit_trip_item_path(item), class: "btn btn-outline-secondary"%>
+            <%= link_to "Delete", trip_item_path(item), data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
+    </div>
           </div>
         <% end %>
       <% end %>
 
-      <%= link_to "Add a trip item", new_trip_trip_item_path(@trip), class: "btn btn-outline-secondary" %>
-    </div>
+
   </div>
 
   <div class="mb-4">

@@ -3,19 +3,18 @@ Rails.application.routes.draw do
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :trips do
-    member do
-      post :confirm
-    end
-    resources :trip_items, only: [:new, :create, :show]
-    resources :chats, only: [:create]
+  member do
+    post :confirm
   end
+  resources :trip_items, only: [:new, :create]
+  resources :chats, only: [:create]
+end
 
   resources :chats, only: [:show, :destroy] do
     resources :messages, only: [:create]
   end
 
-  resources :trip_items, only: [:show, :destroy]
-
+  resources :trip_items, only: [:edit, :update, :destroy]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
