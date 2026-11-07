@@ -2,8 +2,12 @@ class MessagesController < ApplicationController
 
   SYSTEM_PROMPT = <<~PROMPT
       # ...
-      You have access to one tool:
-      - Create a Trip Item with a name based on what the user tells you to add, and notes if the user gives you specifics about the Trip Item. Do not create multiple trip items.
+      You have access to two tools:
+      - TripItemsTool: Create a Trip Item with a name based on what the user tells you to add, and notes if the user gives you specifics about the Trip Item. Do not create multiple trip items.
+      - WeatherTool:
+        - Get current weather conditions for a city
+        - If the user provides travel start and end dates, get the weather forecast for those dates
+        - If the requested dates are outside the available forecast range, explain that a forecast is not yet available
       # ...
     PROMPT
 
@@ -17,6 +21,7 @@ class MessagesController < ApplicationController
       build_conversation_history
 
       @ruby_llm_chat.with_tool(TripItemsTool.new(trip_id:@chat.trip.id))
+      @ruby_llm_chat.with_tool(WeatherTool.new)
 
       response = @ruby_llm_chat.with_instructions(instructions).ask(@message.content)
       @assistant_message = Message.create(role: "assistant", content: response.content, chat: @chat)
@@ -41,7 +46,7 @@ class MessagesController < ApplicationController
   private
 
   def trip_context
-    "The user is planning a trip to #{@chat.trip.destination}. Use this destination as context when answering travel questions unless the user specifies otherwise."
+    "The user is planning a trip to #{@chat.trip.destination} from #{@chat.trip.start_date} to #{@chat.trip.end_date}. Use this destination and these dates as context when answering travel questions unless the user specifies otherwise."
   end
 
   def instructions
