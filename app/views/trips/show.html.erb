@@ -1,5 +1,6 @@
-
 <div class="container mt-4">
+
+  <!-- Trip Details -->
   <div class="card shadow-sm rounded-3 mb-4">
     <div class="card-body">
 
@@ -8,26 +9,33 @@
           class: "w-100 rounded-3 mb-4",
           style: "max-height: 400px; object-fit: cover;",
           alt: @trip.name %>
-        <% end %>
+      <% end %>
 
       <h1><%= @trip.name %></h1>
 
       <p>Destination: <%= @trip.destination %></p>
+
       <p>
         Dates:
         <%= @trip.start_date %> to <%= @trip.end_date %>
       </p>
+
     </div>
   </div>
 
+  <!-- TravelGenie Chats -->
   <div class="card shadow-sm rounded-3 mb-4">
     <div class="card-body">
+
       <h2>Plan your trip with TravelGenie!</h2>
 
-      <p>Ask for recommendations, explore activities, and plan your next adventure.</p>
+      <p>
+        Ask for recommendations, explore activities, and plan your next adventure.
+      </p>
 
       <%= form_with url: trip_chats_path(@trip) do |f| %>
-        <%= f.submit "Start a new chat", class: "btn btn-primary btn-lg mb-3" %>
+        <%= f.submit "Start a new chat",
+          class: "btn btn-primary btn-lg mb-3" %>
       <% end %>
 
       <hr>
@@ -37,54 +45,94 @@
       <% if @trip.chats.empty? %>
         <p>No chats yet. Start a new conversation!</p>
       <% else %>
+
         <div class="row">
+
           <% @trip.chats.each do |chat| %>
             <div class="col-md-6 mb-3">
               <div class="card">
                 <div class="card-body">
-                  <%= link_to chat.title.presence || "Chat ##{chat.id}", chat_path(chat) %>
+                  <%= link_to chat.title.presence || "Chat ##{chat.id}",
+                    chat_path(chat) %>
                 </div>
               </div>
             </div>
           <% end %>
+
         </div>
+
       <% end %>
+
     </div>
   </div>
 
+  <!-- Saved Trip Items -->
   <div class="card shadow-sm rounded-3 mb-4">
     <div class="card-body">
+
       <h2>Saved Trip Items</h2>
 
       <% if @trip.trip_items.empty? %>
+
         <p>No saved items yet.</p>
-        <%= link_to "Add a trip item", new_trip_trip_item_path(@trip), class: "btn btn-outline-secondary" %>
+
+        <%= link_to "Add a trip item",
+          new_trip_trip_item_path(@trip),
+          class: "btn btn-outline-secondary" %>
+
       <% else %>
+
         <% @trip.trip_items.each do |item| %>
+
           <div class="mb-3">
-            <h5><%= item.name %></h5> <p><%= item.notes %></p>
+
+            <h5><%= item.name %></h5>
+
+            <p><%= item.notes.presence || "Add notes for this item" %></p>
+
             <% item.tag_list.each do |tag| %>
-            <span class="badge text-bg-primary"><%= tag %></span>
+              <span class="badge text-bg-primary"><%= tag %></span>
             <% end %>
+
             <hr>
-            <%= link_to "Edit", edit_trip_item_path(item), class: "btn btn-outline-secondary"%>
-            <%= link_to "Delete", trip_item_path(item), data: { turbo_method: :delete }, class: "btn btn-outline-danger" %>
-    </div>
+
+            <%= link_to "Edit",
+              edit_trip_item_path(item),
+              class: "btn btn-outline-secondary" %>
+
+            <%= link_to "Delete",
+              trip_item_path(item),
+              data: { turbo_method: :delete },
+              class: "btn btn-outline-danger" %>
+
           </div>
+
         <% end %>
+
       <% end %>
 
-
+    </div>
   </div>
 
-  <div class="mb-4">
-    <%= link_to "Edit Trip", edit_trip_path(@trip), class: "btn btn-outline-secondary" %>
+  <!-- Trip Actions -->
+  <div class="d-flex flex-wrap gap-2 mb-4">
+
+    <%= link_to "Edit Trip",
+      edit_trip_path(@trip),
+      class: "btn btn-outline-secondary" %>
 
     <%= link_to "Delete Trip",
-        trip_path(@trip),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-        class: "btn btn-outline-danger" %>
+      trip_path(@trip),
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      },
+      class: "btn btn-outline-danger" %>
 
-        <%= link_to "Back to all trips", trips_path(@trip), class: "btn btn-outline-primary" %>
+    <%= link_to "Back to all trips",
+      trips_path,
+      class: "btn btn-outline-primary" %>
+
   </div>
+
 </div>
