@@ -1,32 +1,38 @@
 <div class="container mt-4">
   <h1>Here are your Trips ✈️</h1>
 
-  <%= link_to "Create a new trip", new_trip_path, class: "btn btn-primary mb-4" %>
+  <%= link_to "Create a new trip",
+    new_trip_path,
+    class: "btn btn-primary mb-4" %>
 
   <% if @trips.empty? %>
     <p>You don't have any trips yet. Create your first trip to get started!</p>
   <% else %>
+
     <div class="row">
       <% @trips.each do |trip| %>
         <div class="col-md-6 mb-3">
           <div class="card shadow-sm rounded-3 h-100">
 
             <% if trip.image.attached? %>
-              <%= image_tag trip.image, class: "card-img-top", alt: trip.name %>
+              <%= image_tag trip.image,
+                class: "card-img-top trip-card-image",
+                alt: trip.name %>
+            <% else %>
+              <div class="trip-card-image bg-light"></div>
             <% end %>
 
-            <div class="card-body">
-
+            <div class="card-body d-flex flex-column">
               <h3><%= trip.name %></h3>
-
               <p>📍 <%= trip.destination %></p>
-
               <p>
                 📅 <%= trip.start_date %> to <%= trip.end_date %>
               </p>
-
-              <%= link_to "View Trip", trip_path(trip), class: "btn btn-outline-primary" %>
-
+              <div class="mt-auto">
+                <%= link_to "View Trip",
+                  trip_path(trip),
+                  class: "btn btn-outline-primary" %>
+              </div>
             </div>
           </div>
         </div>
