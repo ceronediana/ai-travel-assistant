@@ -20,7 +20,7 @@ gem "jbuilder"
 # Devise
 gem "devise"
 # RubyLLM
-gem "ruby_llm", "~> 1.2.0"
+gem "ruby_llm", "~> 2.2.0"
 
 gem "kramdown"
 gem "rouge"
